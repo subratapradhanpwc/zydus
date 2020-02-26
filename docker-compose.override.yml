@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  userwebapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ServiceConfig__serviceDiscoveryAddress=http://consul:8500
+      - ServiceConfig__serviceAddress=http://userwebapi:80
+      - ServiceConfig__serviceName=userwebapi
+      - ServiceConfig__serviceId=userwebapi-v1
+    ports:
+      - "80"
+
+  api.gateway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+
+  consul:
+    ports:
+    - "8500"

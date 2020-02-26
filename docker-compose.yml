@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  userwebapi:
+    image: userwebapi:latest
+    build:
+      context: .
+      dockerfile: src/services/AuthenticationAPI/Dockerfile
+    container_name: userwebapi
+
+  api.gateway:
+    image: apigateway:latest
+    build:
+      context: .
+      dockerfile: src/gateways/API.Gateway/Dockerfile
+    container_name: apigateway
+
+  consul:
+    image: consul:latest
+    command: consul agent -dev -log-level=warn -ui -client=0.0.0.0
+    hostname: consul
+    container_name: consul
